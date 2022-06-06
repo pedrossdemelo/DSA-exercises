@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
 
 
+
 def longestIncreasingPath(matrix):
     ROWS, COLS = len(matrix), len(matrix[0])
     mem_cache = [[None] * COLS for _ in range(ROWS)]
