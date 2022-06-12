@@ -19,7 +19,7 @@ def mergeKLists(lists):
             head = head.next
     values.sort()
     if not values:
-        return []
+        return None
     head = ListNode(values.pop())
     while values:
         head = ListNode(values.pop(), head)
