@@ -17,7 +17,7 @@ def subsets(nums):
     return result
 
 
-# Time: O(n^2) | Space: O(n)
+# Time: O(n^2) | Space: O(1)
 def subsets(nums):
     results = [[]]
     for num in nums:
