@@ -1,52 +1,26 @@
 # https://leetcode.com/problems/word-search/
 
 
-# n = rows, m = cols, 
-# Time: O(n * m * 4^len(word))
+# n = rows, m = cols,
+# Time: O(n * m * 4^len(word)) | Space: O(1)
 def exist(board, word):
-    ROWS, COLS = len(board), len(board[0])
-
-    visited = set()
-
-    def get_steps(coord):
-        row, col = coord
-        directions = (
-            (row - 1, col), # up
-            (row + 1, col), # down
-            (row, col - 1), # left
-            (row, col + 1), # right
-        )
-        return [
-            (r, c)
-            for r, c in directions
-            if 0 <= r < ROWS
-            and 0 <= c < COLS
-            and (r, c) not in visited
-            and board[r][c] == word[len(visited)]
-        ]
-
-    def dfs(coord):
-        if len(visited) == len(word):
-            raise Exception("found!")
-        for n_coord in get_steps(coord):
-            visited.add(n_coord)
-            dfs(n_coord)
-            visited.remove(n_coord)
-
-    for row in range(ROWS):
-        for col in range(COLS):
-            if board[row][col] == word: return True
-            if board[row][col] == word[0]:
-                try:
-                    visited.add((row, col))
-                    dfs((row, col))
-                    visited.remove((row, col))
-                except Exception: return True
-
+    ROWS, COLS, LETTERS = len(board), len(board[0]), len(word)
+    def dfs(r, c, i):
+        if i == LETTERS: return True
+        if 0 <= r < ROWS and 0 <= c < COLS and board[r][c] == word[i]:
+            temp, board[r][c] = board[r][c], None
+            if (   dfs(r - 1, c, i + 1)
+                or dfs(r + 1, c, i + 1)
+                or dfs(r, c + 1, i + 1)
+                or dfs(r, c - 1, i + 1)):
+                return True
+            board[r][c] = temp
+        return False
+    for r in range(ROWS):
+        if any(dfs(r, c, 0) for c in range(COLS)): return True
     return False
 
-board = [["a","a"]]
+board = [["a", "a", "a"]]
 word = "aaa"
 
 print(exist(board, word))
-
