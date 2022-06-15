@@ -46,4 +46,4 @@ def allPossibleFBT(n):
 
     return get_fbts_with(n)
 
-print([str(r) for r in allPossibleFBT(11)])
+print([str(r) for r in allPossibleFBT(25)])
