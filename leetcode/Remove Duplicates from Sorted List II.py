@@ -6,14 +6,14 @@ class ListNode:
         self.val = val
         self.next = next
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return f"{self.val} -> {self.next}"
 
 
 # Time: O(n) | Space: O(1)
 def deleteDuplicates(head):
-    dummy = ListNode(next=head)
-    curr, behind = head, dummy
+    sentinel = ListNode(next=head)
+    curr, behind = head, sentinel
     while curr:
         if curr.next and curr.next.val == curr.val:
             duplicate = curr.val
@@ -24,7 +24,7 @@ def deleteDuplicates(head):
             curr = curr.next
             behind = behind.next
 
-    head = dummy.next
+    head = sentinel.next
     return head
 
 
