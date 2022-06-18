@@ -8,6 +8,7 @@ class ListNode:
     def __repr__(self) -> str:
         return f"{self.val} -> {self.next}"
 
+# Time: O(n) | Space: O(1)
 def partition(head, x):
     gTEx_sentinel = gTEx_tail = ListNode()
     sentinel = ListNode(next=head)
