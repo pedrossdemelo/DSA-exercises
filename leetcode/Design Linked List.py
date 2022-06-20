@@ -74,8 +74,8 @@ class MyLinkedList:
         else:
             node_before = self.get_node(index - 1)
             node_before.next = node_before.next.next
-            # if index == self.len - 1:
-            #     self.tail = node_before
+            if index == self.len - 1:
+                self.tail = node_before
         self.len -= 1
 
     def __repr__(self) -> str:
