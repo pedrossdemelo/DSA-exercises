@@ -1,15 +1,13 @@
 # https://leetcode.com/problems/design-circular-queue/
 
 
-class DLLNode:
-    def __init__(self, val=0, prev=None, next=None) -> None:
-        self.val, self.prev, self.next = val, prev, next
+class ListNode:
+    def __init__(self, val=0, next=None) -> None:
+        self.val, self.next = val, next
 
     def __repr__(self) -> str:
         try:
-            prev = "" if self.prev else "None <- "
-            next = f" <-> {self.next}" if self.next else " -> None"
-            return prev + f"{self.val}" + next
+            return f"{self.val} -> {self.next}"
         except RecursionError:
             return "∞"
 
@@ -22,9 +20,9 @@ class MyCircularQueue:
     def enQueue(self, value: int) -> bool:
         if self.isFull(): return False
         if self.isEmpty():
-            self.head = self.tail = DLLNode(value)
+            self.head = self.tail = ListNode(value)
         else:
-            self.tail.next = DLLNode(value, self.tail)
+            self.tail.next = ListNode(value)
             self.tail = self.tail.next
         self.len += 1
         return True
@@ -35,7 +33,6 @@ class MyCircularQueue:
             self.head = self.tail = None
         else:
             self.head = self.head.next
-            self.head.prev = None
         self.len -= 1
         return True
 
