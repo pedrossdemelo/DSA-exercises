@@ -17,10 +17,8 @@ class Twitter:
 
     # O(nmlognm)
     def getNewsFeed(self, userId: int) -> List[int]:
-        feed = [*self.tweets[userId]]
-        for user in self.following[userId]:
-            feed.extend(self.tweets[user])
-        feed.sort(key=lambda x:x[1], reverse=True)
+        feed = [*self.tweets[userId]] + [t for user in self.following[userId] for t in self.tweets[user]]
+        feed.sort(key=lambda x: x[1], reverse=True)
         return [t[0] for t in feed[:10]]
 
     # O(1)
@@ -30,3 +28,20 @@ class Twitter:
     # O(1)
     def unfollow(self, followerId: int, followeeId: int) -> None:
         self.following[followerId].discard(followeeId)
+
+
+methods = [
+    "postTweet",
+    "getNewsFeed",
+    "follow",
+    "postTweet",
+    "getNewsFeed",
+    "unfollow",
+    "getNewsFeed",
+]
+args = [[1, 5], [1], [1, 2], [2, 6], [1], [1, 2], [1]]
+
+t = Twitter()
+
+for method, arg in zip(methods, args):
+    print(getattr(t, method)(*arg))
