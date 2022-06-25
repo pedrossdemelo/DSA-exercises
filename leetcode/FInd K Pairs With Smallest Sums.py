@@ -4,9 +4,10 @@ import heapq
 from random import randrange
 
 # n = len(nums1), m = len(nums2)
-# p = max(n, m, k)
+# p = min(n, m, k)
 # q = min(n * m, k)
-# Space: O(p) | Time: O(qlogz)
+# r = max(n, m, k)
+# Space: O(r) | Time: O(qlogp)
 def kSmallestPairs(nums1, nums2, k):
     N1, N2 = len(nums1), len(nums2)
     candidates = [(nums1[0] + nums2[0], (0, 0))]
@@ -21,7 +22,7 @@ def kSmallestPairs(nums1, nums2, k):
         if n2i < N2 - 1 and n1i == 0:
             heapq.heappush(candidates, (nums1[n1i] + nums2[n2i + 1], (n1i, n2i + 1)))
         k -= 1
-    return len(result), maxspace
+    return result
 
 
 nums1 = sorted(randrange(0, 100000) for _ in range(1000))
