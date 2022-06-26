@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/k-th-smallest-prime-fraction/
+
 import heapq
 
 # Time: O(klogn) | Space: O(n)
