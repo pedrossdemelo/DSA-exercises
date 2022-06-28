@@ -1,8 +1,8 @@
 # https://leetcode.com/problems/maximum-performance-of-a-team/submissions/
 
-from heapq import heapify, heappush, heapreplace
+from heapq import heappush, heapreplace
 
-
+# Time: O(nlogn) | Space: O(n)
 def maxPerformance(n, speed, efficiency, k):
     engineers = sorted(zip(speed, efficiency), key=lambda x: x[1], reverse=True)
     slowestheap = [engineers[0]]
