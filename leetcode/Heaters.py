@@ -1,7 +1,8 @@
 # https://leetcode.com/problems/heaters/
 from typing import List
 
-
+# n = len(houses) | m = len(heaters)
+# Time: O(nlogn + mlogm) | Space: O(1)
 def findRadius(houses: List[int], heaters: List[int]) -> int:
     heaters.sort()
     heater = 0
