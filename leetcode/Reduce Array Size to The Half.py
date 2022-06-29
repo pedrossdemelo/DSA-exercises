@@ -1,10 +1,9 @@
 # https://leetcode.com/problems/reduce-array-size-to-the-half/
 
 from collections import Counter
-from heapq import heappop
-from math import ceil
 
 
+# Time: O(n) | Space: O(n)
 def minSetSize(arr):
     n = len(arr)
     removed = result = 0
