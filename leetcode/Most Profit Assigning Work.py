@@ -1,27 +1,21 @@
 # https://leetcode.com/problems/most-profit-assigning-work/
 
-from bisect import bisect
-from itertools import islice
 from typing import List
 
 # n = len(profit|difficulty) | m = len(worker)
-# Time: O(nlogn + mlogn) | Space: O(n)
+# Time: O(nlogn + mlogm) | Space: O(n)
 def maxProfitAssignment(
     difficulty: List[int], profit: List[int], worker: List[int]
 ) -> int:
-    n = len(profit)
-    jobs = sorted(zip(difficulty, profit), key=lambda x: (x[0], -x[1]))  # O(nlogn)
-    viablejobs = [jobs[0]]
-    for diff, proft in islice(jobs, 1, n): # O(n)
-        if viablejobs[-1][1] >= proft:
-            continue
-        viablejobs.append((diff, proft))
-    del jobs
-    totalprofit = 0
-    for skill in worker:  # O(qlogn)
-        bestjob = bisect(viablejobs, skill, key=lambda x: x[0]) - 1
-        totalprofit += viablejobs[bestjob][1] if bestjob >= 0 else 0
+    jobs = sorted(zip(difficulty, profit)) # O(nlogn)
+    totalprofit = i = best = 0
+    for skill in sorted(worker):  # O(mlogm)
+        while i < len(jobs) and skill >= jobs[i][0]:
+            best = max(best, jobs[i][1])
+            i += 1
+        totalprofit += best
     return totalprofit
+
 
 
 difficulty, profit, worker = (
