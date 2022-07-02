@@ -5,30 +5,31 @@ class TreeNode:
         self.left = left
         self.right = right
 
-    def __repr__(self):
-        if self == None:
+    @classmethod
+    def from_list(cls, arr, i=0):
+        root = None
+        if i < len(arr) and arr[i] is not None:
+            root = cls(arr[i])
+            root.left = cls.from_list(arr, 2 * i + 1)
+            root.right = cls.from_list(arr, 2 * i + 2)
+
+        return root
+
+    def __repr__(s):
+        if s == None:
             return ""
-        if self.left == self.right == None:
-            return str(self.val)
-        ans = str(self.val)
-        if self.left != None:
-            ans = ans + "(" + str(self.left) + ")"
+        if s.left == s.right == None:
+            return str(s.val)
+        ans = str(s.val)
+        if s.left != None:
+            ans = ans + "(" + str(s.left) + ")"
         else:
             ans = ans + "()"
-        if self.right != None:
-            ans = ans + "(" + str(self.right) + ")"
+        if s.right != None:
+            ans = ans + "(" + str(s.right) + ")"
         return ans
 
 from collections import deque
-
-def tree(arr, i=0):
-    root = None
-    if i < len(arr) and arr[i] is not None:
-        root = TreeNode(arr[i])
-        root.left = tree(arr, 2 * i + 1)
-        root.right = tree(arr, 2 * i + 2)
-
-    return root
 
 # Time: O(n) | Space: O(n)
 def zigzagLevelOrder(root):
@@ -49,6 +50,5 @@ def zigzagLevelOrder(root):
                 queue.appendleft((child, depth + 1))
     return result
 
-root = tree([3,9,20,None,None,15,7])
-
+root = TreeNode.from_list([3,9,20,None,None,15,7])
 print(zigzagLevelOrder(root))
