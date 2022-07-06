@@ -92,9 +92,28 @@ def countNodes(root):
     print(f"Iterations: {iterations} | Time Complexity: {log(nodes, 2) ** 2}")
     return nodes
 
+def countNodes(root):
+    def depth(root):
+        depth = -1
+        while root:
+            root = root.left
+            depth += 1
+        return depth
+    nodes = 0
+    currdepth = depth(root)
+    while root:
+        if depth(root.right) == currdepth - 1:
+            nodes += 2 ** currdepth
+            root = root.right
+        else:
+            nodes += 2 ** (currdepth - 1)
+            root = root.left
+        currdepth -= 1
+    return nodes
+
 
 tempstart = process_time_ns()
-array = list(range(10_000_000))
+array = list(range(1_000_000))
 root = TreeNode.from_list(array)
 tempend = process_time_ns()
 elapsed = tempend - tempstart
