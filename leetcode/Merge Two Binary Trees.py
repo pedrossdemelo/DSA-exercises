@@ -43,7 +43,7 @@ class TreeNode:
             ans = ans + "(" + str(s.right) + ")"
         return ans
 
-# Time: O(n) | Space: O(height)
+# Time: O(n) | Space: O(n)
 def mergeTrees(root1, root2):
     if not root1: return root2
     if not root2: return root1
