@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/binary-tree-tilt/submissions/
 
-# Time: O(n) | Space: O(1)
+# Time: O(n) | Space: O(h)
 def findTilt(root):
     result = 0
     def dfs(node):
